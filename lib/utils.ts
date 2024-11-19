@@ -26,3 +26,6 @@ export const debounce = <T extends unknown[]>(
     }, delay);
   };
 };
+
+const s = "test";
+console.log("test");
