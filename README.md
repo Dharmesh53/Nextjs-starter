@@ -1,5 +1,5 @@
 TODOS:
 
-# make navbar sticky
+##### make navbar sticky
 
-# add a modal
+##### add a modal

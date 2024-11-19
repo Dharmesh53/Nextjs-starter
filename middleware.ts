@@ -1,10 +1,12 @@
-import { NextRequest, NextResponse } from "next/server";
+import NextAuth from "next-auth";
 
-export default function middleware(request: NextRequest) {
-  const url = request.nextUrl.clone();
-  console.log(url);
-  return NextResponse.next();
-}
+import authConfig from "./auth.config";
+
+const { auth } = NextAuth(authConfig);
+
+export default auth((request) => {
+  const { nextUrl } = request;
+});
 
 export const config = {
   matcher: [
