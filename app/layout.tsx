@@ -1,24 +1,33 @@
-import type { Metadata } from "next";
-
 import "./globals.css";
 
 import React from "react";
-import { inter } from "@/assets/fonts";
+import { fontGeist, fontHeading, fontSans, fontUrban } from "@/assets/fonts";
 
-export const metadata: Metadata = {
-  title: "Starter",
-  description: "Start Now",
-};
+import { cn, constructMetadata } from "@/lib/utils";
+import { TailwindIndicator } from "@/components/tailwind-indicator";
+
+import Providers from "./providers";
+
+export const metadata = constructMetadata();
 
 export default function RootLayout({
   children,
 }: Readonly<React.PropsWithChildren>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.className} flex min-h-screen w-full flex-col antialiased`}
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          fontSans.variable,
+          fontUrban.variable,
+          fontHeading.variable,
+          fontGeist.variable,
+        )}
       >
-        {children}
+        <Providers>
+          {children}
+          <TailwindIndicator />
+        </Providers>
       </body>
     </html>
   );
