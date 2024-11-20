@@ -1,10 +1,10 @@
 import "./globals.css";
 
-import React from "react";
 import { fontGeist, fontHeading, fontSans, fontUrban } from "@/assets/fonts";
 
 import { cn, constructMetadata } from "@/lib/utils";
-import { TailwindIndicator } from "@/components/tailwind-indicator";
+import { Toaster } from "@/components/ui/sonner";
+import { TailwindIndicator } from "@/components/layout/tailwind-indicator";
 
 import Providers from "./providers";
 
@@ -17,7 +17,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "flex min-h-screen w-full flex-col bg-background font-sans text-foreground antialiased",
           fontSans.variable,
           fontUrban.variable,
           fontHeading.variable,
@@ -26,6 +26,7 @@ export default function RootLayout({
       >
         <Providers>
           {children}
+          <Toaster richColors closeButton />
           <TailwindIndicator />
         </Providers>
       </body>
