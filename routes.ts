@@ -2,18 +2,17 @@
  * An array of routes that are accessible to public
  * These routes don't require authentication
  */
-export const publicRoutes: string[] = ["/", "/auth/new-verification"];
+export const publicRoutes: string[] = ["/", "/error", "/verify/user"];
 
 /**
  * An array of routes that are used for authentication
  * these routes will redirect user to default_login_redirect
  */
 export const authRoutes: string[] = [
-  "/auth/signin",
-  "/auth/signup",
-  "/auth/error",
-  "/auth/reset",
-  "/auth/new-password",
+  "/signin",
+  "/signup",
+  "/verify/reset",
+  "/verify/password",
 ];
 
 /**

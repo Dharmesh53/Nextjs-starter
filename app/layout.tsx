@@ -4,6 +4,8 @@ import { fontGeist, fontHeading, fontSans, fontUrban } from "@/assets/fonts";
 
 import { cn, constructMetadata } from "@/lib/utils";
 import { Toaster } from "@/components/ui/sonner";
+import { NavMobile } from "@/components/layout/mobile-nav";
+import { Navbar } from "@/components/layout/navbar";
 import { TailwindIndicator } from "@/components/layout/tailwind-indicator";
 
 import Providers from "./providers";
@@ -25,7 +27,9 @@ export default function RootLayout({
         )}
       >
         <Providers>
-          {children}
+          <NavMobile />
+          <Navbar scroll />
+          <main className="flex-1">{children}</main>
           <Toaster richColors closeButton />
           <TailwindIndicator />
         </Providers>
