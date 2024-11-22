@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { UserRole } from "@prisma/client";
+import { User, UserRole } from "@prisma/client";
 
-import { useCurrentUser } from "@/hooks/use-current-user";
 import useMediaQuery from "@/hooks/use-media-query";
 import {
   DropdownMenu,
@@ -16,11 +15,8 @@ import {
 import { Icons } from "@/components/shared/icons";
 import { UserAvatar } from "@/components/shared/user-avatar";
 
-export function UserAccountNav() {
-  const { user } = useCurrentUser();
-
+export function UserAccountNav({ user }: { user: Partial<User> }) {
   const [open, setOpen] = useState(false);
-
   const { isMobile } = useMediaQuery();
 
   if (!user) {
@@ -29,7 +25,7 @@ export function UserAccountNav() {
     );
   }
 
-  if (!isMobile) {
+  if (isMobile) {
     // something for mobile
     return null;
   }
@@ -42,32 +38,36 @@ export function UserAccountNav() {
           className="size-8 border"
         />
       </DropdownMenuTrigger>
+
       <DropdownMenuContent align="end">
         <div className="flex items-center justify-start gap-2 p-2">
-          <div className="flex flex-col space-y-1 leading-none">
-            {user.name && <p className="font-medium">{user.name}</p>}
+          <div className="flex flex-col space-y-0.5 leading-none">
+            {user.name && (
+              <p className="font-geist text-sm font-medium">{user.name}</p>
+            )}
             {user.email && (
-              <p className="w-[200px] truncate text-sm text-muted-foreground">
+              <p className="w-[200px] truncate font-geist text-xs text-muted-foreground">
                 {user?.email}
               </p>
             )}
           </div>
         </div>
+
         <DropdownMenuSeparator />
 
-        {user.role === UserRole.ADMIN ? (
+        {user.role === UserRole.ADMIN && (
           <DropdownMenuItem asChild>
             <Link href="/admin" className="flex items-center space-x-2.5">
               <Icons.lock className="size-4" />
-              <p className="text-sm">Admin</p>
+              <span className="text-sm">Admin</span>
             </Link>
           </DropdownMenuItem>
-        ) : null}
+        )}
 
         <DropdownMenuItem asChild>
           <Link href="/dashboard" className="flex items-center space-x-2.5">
             <Icons.layoutDashboard className="size-4" />
-            <p className="text-sm">Dashboard</p>
+            <span className="text-sm">Dashboard</span>
           </Link>
         </DropdownMenuItem>
 
@@ -77,20 +77,23 @@ export function UserAccountNav() {
             className="flex items-center space-x-2.5"
           >
             <Icons.settings className="size-4" />
-            <p className="text-sm">Settings</p>
+            <span className="text-sm">Settings</span>
           </Link>
         </DropdownMenuItem>
+
         <DropdownMenuSeparator />
+
         <DropdownMenuItem
           className="cursor-pointer"
           onSelect={(event) => {
             event.preventDefault();
           }}
+          asChild
         >
-          <div className="flex items-center space-x-2.5">
+          <button className="flex items-center space-x-2.5">
             <Icons.logOut className="size-4" />
-            <p className="text-sm">Log out </p>
-          </div>
+            <span className="text-sm">Log out </span>
+          </button>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

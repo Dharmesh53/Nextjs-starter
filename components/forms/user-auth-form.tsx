@@ -1,11 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import * as z from "zod";
 
-import { cn } from "@/lib/utils";
+import { capitalize, cn } from "@/lib/utils";
 import { userAuthSchema } from "@/lib/validations/auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -31,10 +34,28 @@ export function UserAuthForm({ className, type, ...props }: UserAuthFormProps) {
   });
 
   const [isLoading, setLoading] = useState<LoadingState | null>(null);
+  const searchParams = useSearchParams();
 
   async function onSubmit(data: FormData) {
-    console.log(data);
     setLoading("form");
+
+    const signInResult = await signIn("resend", {
+      email: data.email.toLowerCase(),
+      redirect: false,
+      callbackUrl: searchParams?.get("from") || "/dashboard",
+    });
+
+    setLoading(null);
+
+    if (!signInResult?.ok) {
+      return toast.error("Something went wrong", {
+        description: "Your sign in request failed. Please try again.",
+      });
+    }
+
+    return toast.success("Check your email", {
+      description: "We sent you a login link. Be sure to check your spam too.",
+    });
   }
 
   return (
@@ -77,13 +98,17 @@ export function UserAuthForm({ className, type, ...props }: UserAuthFormProps) {
         <SocialLoginButton
           provider="google"
           isLoading={isLoading}
-          onClick={() => {}}
+          onClick={async () => {
+            await signIn("google");
+          }}
         />
 
         <SocialLoginButton
           provider="gitHub"
           isLoading={isLoading}
-          onClick={() => {}}
+          onClick={async () => {
+            await signIn("github");
+          }}
         />
       </div>
     </div>
@@ -128,7 +153,7 @@ function SocialLoginButton({
       ) : (
         Icon && <Icon className="mr-2 size-4" />
       )}
-      {provider.charAt(0).toUpperCase() + provider.slice(1)}
+      {capitalize(provider)}
     </Button>
   );
 }

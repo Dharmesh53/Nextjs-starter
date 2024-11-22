@@ -10,12 +10,12 @@ import { Icons } from "../shared/icons";
 export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
   return (
     <footer className={cn("border-t", className)}>
-      <div className="border-t py-4">
-        <div className="container flex max-w-6xl items-center justify-between">
+      <div className="border-t px-4 py-1">
+        <div className="flex flex-col items-center justify-between gap-2 text-center md:flex-row">
           <span className="text-sm text-muted-foreground">
             Copyright &copy; 2024. All rights reserved.
           </span>
-          <p className="text-left text-sm text-muted-foreground">
+          <p className="text-sm text-muted-foreground">
             Built by{" "}
             <Link
               href={siteConfig.links.twitter}

@@ -1,10 +1,10 @@
-import { auth } from "./auth";
 import {
   apiAuthPrefix,
   authRoutes,
   DEFAULT_LOGIN_REDIRECT,
   publicRoutes,
-} from "./routes";
+} from "@/routes";
+import { auth } from "auth";
 
 export default auth((request) => {
   const url = request.nextUrl.clone();

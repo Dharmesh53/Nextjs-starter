@@ -1,12 +1,12 @@
 import "./globals.css";
 
 import { fontGeist, fontHeading, fontSans, fontUrban } from "@/assets/fonts";
+import { SessionProvider } from "next-auth/react";
+import { ThemeProvider } from "next-themes";
 
 import { cn, constructMetadata } from "@/lib/utils";
 import { Toaster } from "@/components/ui/sonner";
 import { TailwindIndicator } from "@/components/layout/tailwind-indicator";
-
-import Providers from "./providers";
 
 export const metadata = constructMetadata();
 
@@ -24,11 +24,18 @@ export default function RootLayout({
           fontGeist.variable,
         )}
       >
-        <Providers>
-          <main className="flex-1">{children}</main>
-          <Toaster richColors closeButton />
-          <TailwindIndicator />
-        </Providers>
+        <SessionProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <main className="flex-1">{children}</main>
+            <Toaster richColors closeButton />
+            <TailwindIndicator />
+          </ThemeProvider>
+        </SessionProvider>
       </body>
     </html>
   );
