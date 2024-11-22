@@ -52,7 +52,7 @@ EmptyPlaceHolder.Title = function EmptyPlaceHolderTitle({
 }: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h3
-      className={cn("font-heading mt-5 text-2xl font-bold", className)}
+      className={cn("mt-5 font-heading text-2xl font-bold", className)}
       {...props}
     />
   );
