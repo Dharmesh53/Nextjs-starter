@@ -1,4 +1,4 @@
-const site_url = process.env.NEXT_PUBLIC_APP_URL ?? "http://putyourdomain.com";
+const site_url = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
 
 export const siteConfig = {
   name: "Starter",
