@@ -14,8 +14,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Icons } from "@/components/shared/icons";
-
-import { UserAvatar } from "../shared/user-avatar";
+import { UserAvatar } from "@/components/shared/user-avatar";
 
 export function UserAccountNav() {
   const { user } = useCurrentUser();

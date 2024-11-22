@@ -22,6 +22,7 @@
       "@/*": ["./*"],
       "@/components/*": ["./components/*"],
       "@/lib/*": ["./lib/*"],
+      "db": ["./lib/db"],
       "auth": ["./auth"]
     }
   },

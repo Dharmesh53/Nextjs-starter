@@ -1,3 +1,5 @@
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import { prisma } from "db";
 import NextAuth from "next-auth";
 
 import authConfig from "./auth.config";
@@ -7,20 +9,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     signIn: "/signin",
     error: "/error",
   },
-  events: {},
-  callbacks: {
-    async signIn({ user, account }) {
-      return true;
-    },
-
-    async jwt({ token }) {
-      return token;
-    },
-
-    async session({ token, session }) {
-      return session;
-    },
-  },
   session: { strategy: "jwt" },
+  adapter: PrismaAdapter(prisma),
+  debug: process.env.NODE_ENV !== "production",
   ...authConfig,
+  events: {},
+  callbacks: {},
 });

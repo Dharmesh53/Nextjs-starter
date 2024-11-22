@@ -1,14 +1,19 @@
 import { redirect } from "next/navigation";
 import { UserRole } from "@prisma/client";
 
-export default function AuthLayout({ children }: React.PropsWithChildren) {
-  // const user = await getCurrentUser();
-  // if(user) {
-  //   if(user.role === UserRole.ADMIN) {
-  //     redirect("/admin")
-  //   }
-  //   redirect("/dashboard")
-  // }
+import { getCurrentUser } from "@/lib/session";
 
-  return <div className="min-h-screen">{children}</div>;
+export default async function AuthLayout({
+  children,
+}: React.PropsWithChildren) {
+  const user = await getCurrentUser();
+
+  if (user) {
+    if (user.role === UserRole.ADMIN) {
+      redirect("/admin");
+    }
+    redirect("/dashboard");
+  }
+
+  return <>{children}</>;
 }

@@ -39,7 +39,10 @@ import {
 
 export type Icon = LucideIcon;
 
-export const Icons = {
+export const Icons: Record<
+  string,
+  Icon | ((props: LucideProps) => JSX.Element)
+> = {
   add: Plus,
   arrowRight: ArrowRight,
   arrowUpRight: ArrowUpRight,

@@ -1,14 +1,10 @@
-import NextAuth from "next-auth";
-
-import authConfig from "./auth.config";
+import { auth } from "./auth";
 import {
   apiAuthPrefix,
   authRoutes,
   DEFAULT_LOGIN_REDIRECT,
   publicRoutes,
 } from "./routes";
-
-const { auth } = NextAuth(authConfig);
 
 export default auth((request) => {
   const url = request.nextUrl.clone();
