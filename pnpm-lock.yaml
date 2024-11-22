@@ -64,6 +64,9 @@ importers:
       react-hook-form:
         specifier: ^7.53.2
         version: 7.53.2(react@18.3.1)
+      resend:
+        specifier: ^4.0.1
+        version: 4.0.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       shadcn:
         specifier: ^2.1.6
         version: 2.1.6(typescript@5.6.3)
@@ -1547,6 +1550,16 @@ packages:
     engines: { node: ">=18.0.0" }
     peerDependencies:
       react: ^18.0 || ^19.0 || ^19.0.0-rc
+
+  "@react-email/render@1.0.1":
+    resolution:
+      {
+        integrity: sha512-W3gTrcmLOVYnG80QuUp22ReIT/xfLsVJ+n7ghSlG2BITB8evNABn1AO2rGQoXuK84zKtDAlxCdm3hRyIpZdGSA==,
+      }
+    engines: { node: ">=18.0.0" }
+    peerDependencies:
+      react: ^18.0 || ^19.0 || ^19.0.0-rc
+      react-dom: ^18.0 || ^19.0 || ^19.0.0-rc
 
   "@react-email/render@1.0.2":
     resolution:
@@ -4770,6 +4783,13 @@ packages:
       }
     engines: { node: ">=0.10.0" }
 
+  resend@4.0.1:
+    resolution:
+      {
+        integrity: sha512-EkCRfzKw9JX7N75L+0BC8oXohDBLhlhl4w7AgrkEW2TAsOMBsVcbQHPe8cRWP6Ea7KDhD158TsNjbCBcohed5A==,
+      }
+    engines: { node: ">=18" }
+
   resolve-from@4.0.0:
     resolution:
       {
@@ -6460,6 +6480,14 @@ snapshots:
   "@react-email/preview@0.0.11(react@18.3.1)":
     dependencies:
       react: 18.3.1
+
+  "@react-email/render@1.0.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)":
+    dependencies:
+      html-to-text: 9.0.5
+      js-beautify: 1.15.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      react-promise-suspense: 0.3.4
 
   "@react-email/render@1.0.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)":
     dependencies:
@@ -8421,6 +8449,13 @@ snapshots:
   require-directory@2.1.1: {}
 
   require-from-string@2.0.2: {}
+
+  resend@4.0.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      "@react-email/render": 1.0.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+    transitivePeerDependencies:
+      - react
+      - react-dom
 
   resolve-from@4.0.0: {}
 

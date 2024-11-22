@@ -16,7 +16,7 @@ import { Icons } from "@/components/shared/icons";
 interface MagicLinkEmailProps {
   firstName: string;
   actionUrl: string;
-  mailType: "login" | "register";
+  mailType: "signin" | "signup";
   siteName: string;
 }
 
@@ -37,20 +37,20 @@ export function MagicLinkEmail({
             <Text className="text-base">Hi {firstName},</Text>
             <Text className="text-base">
               Welcome to {siteName} ! Click the link below to{" "}
-              {mailType === "login" ? "sign in to" : "activate"} your account.
+              {mailType === "signin" ? "sign in to" : "activate"} your account.
             </Text>
             <Section className="my-5 text-center">
               <Button
                 className="inline-block rounded-md bg-zinc-900 px-4 py-2 text-base text-white no-underline"
                 href={actionUrl}
               >
-                {mailType === "login" ? "Sign in" : "Activate Account"}
+                {mailType === "signin" ? "Sign in" : "Activate Account"}
               </Button>
             </Section>
             <Text className="text-base">
               This link expires in 24 hours and can only be used once.
             </Text>
-            {mailType === "login" ? (
+            {mailType === "signin" ? (
               <Text className="text-base">
                 If you did not try to log into your account, you can safely
                 ignore it.

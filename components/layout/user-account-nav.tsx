@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { User, UserRole } from "@prisma/client";
+import { signOut } from "next-auth/react";
 
 import useMediaQuery from "@/hooks/use-media-query";
 import {
@@ -85,12 +86,13 @@ export function UserAccountNav({ user }: { user: Partial<User> }) {
 
         <DropdownMenuItem
           className="cursor-pointer"
-          onSelect={(event) => {
+          onSelect={async (event) => {
             event.preventDefault();
+            await signOut();
           }}
           asChild
         >
-          <button className="flex items-center space-x-2.5">
+          <button className="flex w-full items-center space-x-2.5">
             <Icons.logOut className="size-4" />
             <span className="text-sm">Log out </span>
           </button>

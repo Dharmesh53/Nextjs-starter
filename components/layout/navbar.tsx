@@ -7,11 +7,10 @@ import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import useScroll from "@/hooks/use-scroll";
-
-import { Icons } from "../shared/icons";
-import MaxWidthWrapper from "../shared/max-width-wrapper";
-import { Button } from "../ui/button";
-import { Skeleton } from "../ui/skeleton";
+import { buttonVariants } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Icons } from "@/components/shared/icons";
+import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
 
 interface NavbarProps {
   scroll?: boolean;
@@ -62,28 +61,32 @@ export function Navbar({ scroll = false }: NavbarProps) {
           {user ? (
             <Link
               href={user.role === "ADMIN" ? "/admin" : "/dashboard"}
-              className="hidden md:block"
+              className={cn(
+                "hidden gap-2 px-5 md:block",
+                buttonVariants({
+                  variant: "default",
+                  size: "sm",
+                  rounded: "full",
+                }),
+              )}
             >
-              <Button
-                className="gap-2 px-5"
-                variant="default"
-                size="sm"
-                rounded="full"
-              >
-                <span>Dashboard</span>
-              </Button>
+              <span>Dashboard</span>
             </Link>
           ) : status === "unauthenticated" ? (
-            <Button
-              className="hidden gap-2 px-5 md:flex"
-              variant="default"
-              size="sm"
-              rounded="full"
-              onClick={() => {}}
+            <Link
+              href={"/signin"}
+              className={cn(
+                "hidden gap-2 px-5 md:flex",
+                buttonVariants({
+                  variant: "default",
+                  size: "sm",
+                  rounded: "full",
+                }),
+              )}
             >
               <span>Sign In</span>
               <Icons.arrowRight className="size-4" />
-            </Button>
+            </Link>
           ) : (
             <Skeleton className="hidden h-9 w-28 rounded-full lg:flex" />
           )}
