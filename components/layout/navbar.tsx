@@ -62,7 +62,7 @@ export function Navbar({ scroll = false }: NavbarProps) {
             <Link
               href={user.role === "ADMIN" ? "/admin" : "/dashboard"}
               className={cn(
-                "hidden gap-2 px-5 md:block",
+                "hidden gap-2 px-5 md:flex",
                 buttonVariants({
                   variant: "default",
                   size: "sm",
