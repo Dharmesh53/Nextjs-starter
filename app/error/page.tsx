@@ -1,16 +1,16 @@
 "use client";
 
+import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Icons } from "@/components/shared/icons";
 
 export default function Error() {
-  const searchParams = useSearchParams();
-  const error = Object.fromEntries(searchParams.entries());
   const router = useRouter();
 
   return (
@@ -22,12 +22,11 @@ export default function Error() {
         height={400}
         className="pointer-events-none mb-5 mt-6 dark:invert"
       />
-      <h1 className="text-center font-extrabold">Something went wrong!</h1>
-      {Object.keys(error).length > 0 && (
-        <pre className="rounded-lg bg-muted/30 p-3">
-          {JSON.stringify(error, null, 2)}
-        </pre>
-      )}
+
+      <Suspense fallback={<Skeleton className="size-full rounded-lg" />}>
+        <ErrorJson />
+      </Suspense>
+
       <div className="flex gap-2">
         <Link
           href={".."}
@@ -51,5 +50,21 @@ export default function Error() {
         </Link>
       </div>
     </div>
+  );
+}
+
+function ErrorJson() {
+  const searchParams = useSearchParams();
+  const error = Object.fromEntries(searchParams.entries());
+
+  return (
+    <>
+      <h1 className="text-center font-extrabold">Something went wrong!</h1>
+      {Object.keys(error).length > 0 && (
+        <pre className="rounded-lg bg-muted/30 p-3">
+          {JSON.stringify(error, null, 2)}
+        </pre>
+      )}
+    </>
   );
 }
