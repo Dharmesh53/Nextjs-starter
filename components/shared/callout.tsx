@@ -70,13 +70,13 @@ export function Callout({
   return (
     <div
       className={cn(
-        "mt-3 flex items-start space-x-3 rounded-lg border px-4 py-2 text-[15.6px] dark:border-none",
+        "flex items-center space-x-3 rounded-lg border px-4 py-2 text-[15.6px] dark:border-none",
         classes,
         twClass,
       )}
       {...props}
     >
-      <div className="mt-1 shrink-0">
+      <div className="shrink-0">
         <Icon className="size-5" />
       </div>
 
